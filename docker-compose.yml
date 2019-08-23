@@ -1,0 +1,24 @@
+version: '3.0'
+services:
+  db:
+    image: cmallikarjun080/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: malli
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_db_user
+      MYSQL_PASSWORD: example_db_pass
+    ports:
+     - "3306:3306"
+  jenkins:
+    image: cmallikarjun080/jenkins
+    ports:
+     - "8180:8080"
+     - "50000:50000"
+    links:
+     - db
+  tomcat:
+    image: cmallikarjun080/tomcat
+    ports:
+     - "8280:8080"
+    links:
+     - db
